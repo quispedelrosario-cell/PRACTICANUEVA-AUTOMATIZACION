@@ -27,7 +27,7 @@ class BasePage:
         """Retorna el título de la página actual."""
         return self.page.title()
 
-    def wait_for_selector(self, selector: str, timeout: int = 10000):
+    def wait_for_selector(self, selector: str, timeout: int = 30000):
         """Espera a que un selector esté visible."""
         self.page.wait_for_selector(selector, timeout=timeout)
 

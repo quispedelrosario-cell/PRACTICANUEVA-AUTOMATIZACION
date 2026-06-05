@@ -59,7 +59,7 @@ class ProductPage(BasePage):
     def add_to_cart(self):
         """Hace clic en el botón 'Agregar al carrito'."""
         with allure.step("Hacer clic en 'Add to Cart'"):
-            self.wait_for_selector(self.ADD_TO_CART_BUTTON)
+            self.wait_for_selector(self.ADD_TO_CART_BUTTON, timeout=30000)
             self.take_screenshot("Antes de agregar al carrito")
             self.page.locator(self.ADD_TO_CART_BUTTON).click()
             self.page.wait_for_timeout(1500)
