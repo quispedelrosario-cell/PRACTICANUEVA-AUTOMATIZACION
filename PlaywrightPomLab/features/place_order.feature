@@ -1,4 +1,4 @@
-# language: es
+
 Feature: Agregar productos al carrito en Demoblaze
 
 

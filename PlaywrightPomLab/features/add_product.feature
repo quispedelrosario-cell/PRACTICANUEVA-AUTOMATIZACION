@@ -1,4 +1,4 @@
-# language: es
+
 Feature: Agregar artículo al carrito en Demoblaze
   Como cliente quiero agregar un producto al carrito
   Para poder verificar la compra en el sitio demoblaze.com
