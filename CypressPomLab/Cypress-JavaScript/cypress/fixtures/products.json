@@ -1,0 +1,17 @@
+{
+  "greyJacket": {
+    "name": "Grey jacket",
+    "price": "£55.00",
+    "url": "https://sauce-demo.myshopify.com/collections/frontpage/products/grey-jacket"
+  },
+  "noirJacket": {
+    "name": "Noir jacket",
+    "price": "£60.00",
+    "url": "https://sauce-demo.myshopify.com/collections/frontpage/products/noir-jacket"
+  },
+  "stripedTop": {
+    "name": "Striped top",
+    "price": "£50.00",
+    "url": "https://sauce-demo.myshopify.com/collections/frontpage/products/striped-top"
+  }
+}
