@@ -60,7 +60,7 @@ class ProductPage(BasePage):
                 dialog.accept()
             
             # Configurar el listener ANTES de interactuar con la página
-            self.page.on("dialog", handle_dialog)
+            self.page.once("dialog", handle_dialog)
             
             # Esperar a que el botón sea visible
             self.page.locator(self.ADD_TO_CART_BUTTON).first.wait_for(state="visible", timeout=20000)

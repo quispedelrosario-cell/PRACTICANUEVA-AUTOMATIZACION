@@ -78,9 +78,9 @@ pipeline {
             steps {
                 echo '=== Combinando resultados ==='
                 bat '''
-                    if not exist %ALLURE_RESULTS_ALL% mkdir %ALLURE_RESULTS_ALL%
-                    if exist %ALLURE_RESULTS_PW% xcopy /E /Y %ALLURE_RESULTS_PW%\\* %ALLURE_RESULTS_ALL%\\
-                    if exist %ALLURE_RESULTS_CYPRESS% xcopy /E /Y %ALLURE_RESULTS_CYPRESS%\\* %ALLURE_RESULTS_ALL%\\
+                    if not exist reports\\allure-results-all mkdir reports\\allure-results-all
+                    if exist reports\\allure-results-playwright xcopy /E /Y /I reports\\allure-results-playwright\\* reports\\allure-results-all\\
+                    if exist reports\\allure-results-cypress xcopy /E /Y /I reports\\allure-results-cypress\\* reports\\allure-results-all\\
                 '''
                 echo '=== Generando reporte HTML unificado ==='
                 bat 'allure generate %ALLURE_RESULTS_ALL% --clean -o %ALLURE_REPORT%'
