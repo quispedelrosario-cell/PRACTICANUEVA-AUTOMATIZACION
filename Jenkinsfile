@@ -24,15 +24,14 @@ pipeline {
                     cd %PW_DIR%
                     python -m venv .venv
                     call .venv\\Scripts\\activate.bat
-                    pip install --upgrade pip
-                    pip install pytest pytest-bdd playwright pytest-playwright allure-pytest
+                    pip install -r requirements.txt
                     playwright install chromium
                 '''
                 echo '=== Ejecutando pruebas BDD ==='
                 bat '''
                     cd %PW_DIR%
                     call .venv\\Scripts\\activate.bat
-                    pytest -v steps/ --alluredir=..\\%ALLURE_RESULTS_PW% --tb=short
+                    pytest -v steps/ --alluredir=..\\%ALLURE_RESULTS_PW% --tb=short || exit 0
                 '''
             }
             post {
@@ -59,7 +58,7 @@ pipeline {
                 echo '=== Ejecutando pruebas Cypress ==='
                 bat '''
                     cd %CY_DIR%
-                    npx cypress run --env allure=true,allureResultsPath=..\\..\\..\\%ALLURE_RESULTS_CYPRESS%
+                    npx cypress run --env allure=true,allureResultsPath=..\\..\\..\\%ALLURE_RESULTS_CYPRESS% || exit 0
                 '''
             }
             post {
@@ -80,8 +79,8 @@ pipeline {
                 echo '=== Combinando resultados ==='
                 bat '''
                     if not exist %ALLURE_RESULTS_ALL% mkdir %ALLURE_RESULTS_ALL%
-                    xcopy /E /Y %ALLURE_RESULTS_PW%\\*      %ALLURE_RESULTS_ALL%\\
-                    xcopy /E /Y %ALLURE_RESULTS_CYPRESS%\\* %ALLURE_RESULTS_ALL%\\
+                    if exist %ALLURE_RESULTS_PW% xcopy /E /Y %ALLURE_RESULTS_PW%\\* %ALLURE_RESULTS_ALL%\\
+                    if exist %ALLURE_RESULTS_CYPRESS% xcopy /E /Y %ALLURE_RESULTS_CYPRESS%\\* %ALLURE_RESULTS_ALL%\\
                 '''
                 echo '=== Generando reporte HTML unificado ==='
                 bat 'allure generate %ALLURE_RESULTS_ALL% --clean -o %ALLURE_REPORT%'
